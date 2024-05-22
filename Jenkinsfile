@@ -39,12 +39,10 @@ pipeline {
       }
     }
 
-    stage('Deploy App') {
-      steps {
+    stage('Deploy App') {      
         steps{
         sh "docker run -d -it -p 80:80 $registry:latest"
-      }
-      }
+      }      
     }
   }
 }
