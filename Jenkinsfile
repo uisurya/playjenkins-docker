@@ -11,7 +11,7 @@ pipeline {
   stages {
     stage('Checkout Source') {
       steps {
-        git 'https://github.com/sudhamshk/playjenkins.git'
+        git 'https://github.com/sudhamshk/playjenkins-docker.git'
       }
     }
 
@@ -41,9 +41,9 @@ pipeline {
 
     stage('Deploy App') {
       steps {
-        script {
-          kubernetesDeploy(configs: "myweb.yaml", kubeconfigId: "mykubeconfig")
-        }
+        steps{
+        sh "docker run -d -it -p 80:80 $registry:latest"
+      }
       }
     }
   }
